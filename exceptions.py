@@ -4,8 +4,8 @@
 # Write a program that invokes the previous function. Use exceptions.
 def potencia(base: int, power: int) -> int:
     total = 1
-    print(f"Base: {base}:{type(base)}")
-    print(f"Power: {power}:{type(power)}")
+    # print(f"Base: {base}:{type(base)}")
+    # print(f"Power: {power}:{type(power)}")
     if type(base) == type(power) == int:
         for i in range(power):
             total *= base
@@ -15,6 +15,6 @@ def potencia(base: int, power: int) -> int:
 
 
 try:
-    print(potencia(5, 3))
+    print(potencia(6, 4))
 except Exception as e:
     print(e)
