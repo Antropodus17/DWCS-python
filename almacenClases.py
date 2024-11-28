@@ -59,3 +59,110 @@ class Calculator:
 
     def sum(self):
         return self.num1 + self.num2
+
+
+# ejercicio 3.7
+"""Persona"""
+
+
+class Person:
+    """Constructor"""
+
+    def __init__(self, id, name, age):
+        self.setId(id)
+        self.setName(name)
+        self.setAge(age)
+
+    """SETTERS"""
+
+    def setId(self, id):
+        self.id = str(id)
+
+    def setName(self, name):
+        self.name = str(name)
+
+    def setAge(self, age):
+        self.age = int(age)
+
+    """TO STRING"""
+
+    def __str__(self, tab=0):
+        return f"{'    '*tab}Id: {self.id}\n{'    '*tab}Name: {self.name}\n{'    '*tab}Age: {self.age}"
+
+
+"""Estudiante"""
+
+
+class Student:
+
+    def __init__(self, id, degree, person):
+        self.setId(id)
+        self.setDegree(degree)
+        self.setPerson(person)
+
+    def setId(self, id):
+        self.id = str(id)
+
+    def setDegree(self, degree):
+        self.degree = str(degree)
+
+    def setPerson(self, person):
+        if type(person) == Person:
+            self.person = person
+        else:
+            raise TypeError("Person must be of type Person")
+
+    def __str__(self, tab=0):
+        return f"{'    '*tab}Id: {self.id}\n{'    '*tab}Degree: {self.degree}\n{'    '*tab}Person:\n{self.person.__str__(tab+1)}"
+
+
+"""Grupo de estudiantes"""
+
+
+class StudentGroup:
+    """Constructor"""
+
+    def __init__(self, id, name, students):
+        self.setId(id)
+        self.setName(name)
+        self.setStudents(students)
+
+    """SETTERS"""
+
+    def setId(self, id):
+        self.id = str(id)
+
+    def setName(self, name):
+        self.name = str(name)
+
+    def setStudents(self, students):
+        self.students = []
+        for student in students:
+            if type(student) == Student:
+                self.students.append(student)
+
+    """TO STRING"""
+
+    def __str__(self, tab=0) -> str:
+        std = "" if self.students == [] else "Students: "
+        return f"{'    '*tab}Id: {self.id}\n{'    '*tab}Name: {self.name}\n{'    '*tab}{std}{self.stringStudents(tab)}"
+
+    def stringStudents(self, tab):
+        studentsString = ""
+        for student in self.students:
+            studentsString += f"\n{student.__str__(tab+1)}"
+        return studentsString
+
+
+class Alien:
+    """Alien class"""
+
+    numberOfAlien = 0
+
+    def __init__(self, name):
+        self.name = name
+        Alien.numberOfAlien += 1
+
+    @staticmethod
+    def getNumberOfAliens():
+        return Alien.numberOfAlien

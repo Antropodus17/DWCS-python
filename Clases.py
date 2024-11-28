@@ -1,77 +1,66 @@
-"""Persona"""
+from colorama import Fore
+from datetime import date
 
 
 class Person:
-    """Constructor"""
+    """Class persona for managgin the data"""
 
-    def __init__(self, id, name, age):
-        self.setId(id)
-        self.setName(name)
-        self.setAge(age)
+    def __init__(self, name: str, email: str, telephone: str):
+        self.name = name
+        self.email = email
+        self.telephone = telephone
 
-    """SETTERS"""
-
-    def setId(self, id):
-        self.id = str(id)
-
-    def setName(self, name):
-        self.name = str(name)
-
-    def setAge(self, age):
-        self.age = int(age)
-
-    """TO STRING"""
-
-    def __str__(self, tab=0):
-        return f"{"\t"*tab}Id: {self.id}\n{"\t"*tab}Name: {self.name}\n{"\t"*tab}Age: {self.age}"
+    def __str__(self, tab=0) -> str:
+        esp0 = "\n" + "\t" * tab
+        esp1 = esp0 + "\t"
+        return (
+            Fore.BLUE
+            + f"{esp0}Name: {self.name}{esp1}Email: {self.email}{esp1}Telephone: {self.telephone}"
+            + Fore.RESET
+        )
 
 
-"""Estudiante"""
+class Product:
+    """Class product for managging the data"""
+
+    def __init__(self, name: str, description: str, price: float, image: str):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.image = image
+
+    def __str__(self, tab=0) -> str:
+        esp0 = "\n" + "\t" * tab
+        esp1 = esp0 + "\t"
+        return (
+            Fore.MAGENTA
+            + f"{esp0}Name: {self.name}{esp1}Description: {self.description}{esp1}Price: {self.price}{esp1}Image: {self.image}"
+            + Fore.RESET
+        )
 
 
-class Student:
+class Order:
+    """Class order for managging the data"""
 
-    def __init__(self, id, degree, person):
-        self.setId(id)
-        self.setDegree(degree)
-        self.setPerson(person)
+    def __init__(self, date: date, products: list[Product], client: Person):
+        self.date = date
+        self.products = products
+        self.client = client
 
-    def setId(self, id):
-        self.id = str(id)
+    def getTotal(self) -> float:
+        total = 0
+        for product in self.products:
+            total += product.price
+        return total
 
-    def setDegree(self, degree):
-        self.degree = str(degree)
+    def __str__(self, tab=0) -> str:
+        esp0 = "\n" + "\t" * tab
 
-    def setPerson(self, person):
-        if type(person) == Person:
-            self.person = person
-        else:
-            raise TypeError("Person must be of type Person")
-
-    def __str__(self, tab=0):
-        return f"{"\t"*tab}Id: {self.id}\n{"\t"*tab}Degree: {self.degree}\n{"\t"*tab}Person: {self.person}"
-    
-
-"""Grupo de estudiantes"""
-class studentGroup:
-
-    """Constructor"""
-    def __init__(self, id,name ,students):
-        self.setId(id)
-
-    """SETTERS"""
-    def setId(self,id):
-        self.id=str(id)
-
-    def setName(self,name):
-        self.name=str(name)
-
-    def setStudents(self,students):
-        self.students=[]
-        for student in students:
-            if type(student)==Student:
-                self.students.append(student)
-    """TO STRING"""
-    def __str__(self) -> str:
-        pass
-    
+        cadena = Fore.GREEN + f"{esp0}Date: {self.date}"
+        cadena += f"{esp0}Products:"
+        for product in self.products:
+            cadena += product.__str__(tab + 1)
+        cadena += Fore.RED + f"{esp0}    Total Price: {self.getTotal()}"
+        cadena += Fore.GREEN + f"{esp0}Person: "
+        cadena += self.client.__str__(tab + 1)
+        return cadena + Fore.RESET
