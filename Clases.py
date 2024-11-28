@@ -1,66 +1,61 @@
-from colorama import Fore
-from datetime import date
+"""docstring for Car."""
 
 
-class Person:
-    """Class persona for managgin the data"""
+class Car:
+    """Constructor"""
 
-    def __init__(self, name: str, email: str, telephone: str):
-        self.name = name
-        self.email = email
-        self.telephone = telephone
+    def __init__(self, color, power):
+        self.color = color
+        self.power = power
 
-    def __str__(self, tab=0) -> str:
-        esp0 = "\n" + "\t" * tab
-        esp1 = esp0 + "\t"
-        return (
-            Fore.BLUE
-            + f"{esp0}Name: {self.name}{esp1}Email: {self.email}{esp1}Telephone: {self.telephone}"
-            + Fore.RESET
-        )
+    def __str__(self):
+        return f"This car is :self.color and have :self.power horse"
 
 
-class Product:
-    """Class product for managging the data"""
-
-    def __init__(self, name: str, description: str, price: float, image: str):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.image = image
-
-    def __str__(self, tab=0) -> str:
-        esp0 = "\n" + "\t" * tab
-        esp1 = esp0 + "\t"
-        return (
-            Fore.MAGENTA
-            + f"{esp0}Name: {self.name}{esp1}Description: {self.description}{esp1}Price: {self.price}{esp1}Image: {self.image}"
-            + Fore.RESET
-        )
+"""Class Calculator for make calculations"""
 
 
-class Order:
-    """Class order for managging the data"""
+class Calculator:
 
-    def __init__(self, date: date, products: list[Product], client: Person):
-        self.date = date
-        self.products = products
-        self.client = client
+    numberOfObjects = 0
 
-    def getTotal(self) -> float:
-        total = 0
-        for product in self.products:
-            total += product.price
-        return total
+    def __init__(self, num1=0, num2=0):
+        self.setNum1(num1)
+        self.setNum2(num2)
+        Calculator.numberOfObjects += 1
 
-    def __str__(self, tab=0) -> str:
-        esp0 = "\n" + "\t" * tab
+    """Setter for the num1"""
 
-        cadena = Fore.GREEN + f"{esp0}Date: {self.date}"
-        cadena += f"{esp0}Products:"
-        for product in self.products:
-            cadena += product.__str__(tab + 1)
-        cadena += Fore.RED + f"{esp0}    Total Price: {self.getTotal()}"
-        cadena += Fore.GREEN + f"{esp0}Person: "
-        cadena += self.client.__str__(tab + 1)
-        return cadena + Fore.RESET
+    def setNum1(self, num):
+        if type(num) != int:
+            raise TypeError("The number must be a integer")
+
+        self.num1 = num
+
+    """Getter of the num2"""
+
+    def getNumb1(self):
+        return self.num1
+
+    """Setter for the num2"""
+
+    def setNum2(self, num):
+        if type(num) != int:
+            raise TypeError("The number must be a integer")
+
+        self.num2 = num
+
+    """Getter of the num2"""
+
+    def getNumb2(self):
+        return self.num2
+
+    """To string of the Calculator"""
+
+    def __str__(self):
+        return f"Numero 1: {self.num1}\nNumero 2: {self.num2}\nSuma: {self.sum()}"
+
+    """Method to return the sum of the two nums"""
+
+    def sum(self):
+        return self.num1 + self.num2
