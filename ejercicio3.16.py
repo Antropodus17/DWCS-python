@@ -1,8 +1,8 @@
-from Clases import Product, Person, Order
+from almacenClases import Product, Person3, Order
 from datetime import date
 
 
-persona = Person("sergio", "a23sergiopn@iessanclemente.net", "+64-608644411")
+persona = Person3("sergio", "a23sergiopn@iessanclemente.net", "+64-608644411")
 productos = []
 i = 0
 while i < 3:

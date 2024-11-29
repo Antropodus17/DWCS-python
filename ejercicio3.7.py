@@ -1,4 +1,4 @@
-from Clases import Person, Student, StudentGroup
+from almacenClases import Person, Student, StudentGroup
 
 
 student1 = Student(1, "Algebra", Person(1, "Sergio", 22))
