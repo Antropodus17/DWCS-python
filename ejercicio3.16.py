@@ -7,11 +7,11 @@ productos = []
 i = 0
 while i < 3:
     productos.append(
-        Product(f"{date.today()} {i}", "abcd", 10 + i * 5, f"~/Imágenes/test{i}")
+        Product(f"Producto {i}", "abcd", 10 + i * 5, f"~/Imágenes/test{i}")
     )
     i += 1
 
-orden = Order("hoy", productos, persona)
+orden = Order(f"{date.today()}", productos, persona)
 
 
 print(orden)
