@@ -1,4 +1,4 @@
-from Clases import DivisionByZeroError
+from almacenClases import DivisionByZeroError
 from colorama import Fore
 
 continuar = True
